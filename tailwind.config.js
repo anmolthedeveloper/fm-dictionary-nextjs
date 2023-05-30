@@ -9,17 +9,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        darkestBlack: "hsl(0,0%,2%)",
-        darkBlack: "hsl(0,0%,12%)",
-        darkestGray: "hsl(0,0%,18%)",
-        darkGray: "hsl(0,0%,23%)",
-
-        gray: "hsl(0,0%,51%)",
-        lightGray: "hsl(0,0%,91%)",
-        lightestGray: "hsl(0,0%,96%)",
-
-        purple: "hsl(274,82%,60%)",
-        red: "hsl(0,100%,66%)",
+        darkestBlackCustom: "hsl(0,0%,2%)",
+        darkBlackCustom: "hsl(0,0%,12%)",
+        darkestGrayCustom: "hsl(0,0%,18%)",
+        darkGrayCustom: "hsl(0,0%,23%)",
+        grayCustom: "hsl(0,0%,51%)",
+        lightGrayCustom: "hsl(0,0%,91%)",
+        lightestGrayCustom: "hsl(0,0%,96%)",
+        purpleCustom: "hsl(274,82%,60%)",
+        redCustom: "hsl(0,100%,66%)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
