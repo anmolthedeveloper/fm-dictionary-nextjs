@@ -1,25 +1,30 @@
 "use client";
+import Header from "@/components/Header";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const [checked, setChecked] = useState(
+    currentTheme === "dark" ? true : false
+  );
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
   if (!mounted) return null;
-  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  const clickHandler = () => {
+    setChecked(!checked);
+    setTheme(!checked ? "dark" : "light");
+  };
 
   console.log("CURRENT THEME: " + currentTheme);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <h1 className="dark:text-purple-500">hello WORLD</h1>
-      </div>
-    </main>
+    <div className="mx-64 ">
+      <Header checked={checked} onClick={clickHandler} />
+    </div>
   );
 }
