@@ -21,9 +21,8 @@ export default function Home() {
     setTheme(!checked ? "dark" : "light");
   };
 
-  console.log("CURRENT THEME: " + currentTheme);
   return (
-    <div className="mx-64 ">
+    <div className="mx-5 sm:mx-20 lg:mx-32 xl:mx-64 sm:mt-5 lg:mt-10">
       <Header checked={checked} onClick={clickHandler} />
     </div>
   );
