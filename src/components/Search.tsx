@@ -31,10 +31,10 @@ export default function Search() {
     });
     element.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
-        if (event.target!.value === "") setIsEmpty(true);
+        if ((event.target as HTMLInputElement).value === "") setIsEmpty(true);
         else {
           setIsEmpty(false);
-          handleButtonClick(event.target!.value);
+          handleButtonClick((event.target as HTMLInputElement).value);
         }
       }
     });
@@ -76,11 +76,7 @@ export default function Search() {
       <p className={`text-red-500 ${isEmpty ? "block" : "hidden"}`}>
         Whoops, can’t be empty…
       </p>
-      {result ? (
-        <div>{JSON.stringify(result)}</div>
-      ) : (
-        <p>Something went wrong!</p>
-      )}
+      {result ? <div>{JSON.stringify(result)}</div> : <p></p>}
     </div>
   );
 }
