@@ -6,13 +6,19 @@ export default function Search() {
   const inputElement = useRef<HTMLInputElement>(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [searchTxt, setSearchTxt] = useState("");
+  const [result, setResult] = useState<any | null>(null);
 
   const handleButtonClick = (searchTerm: any) => {
-    // Called when button is clicked
-    if (searchTerm === "") setIsEmpty(true);
-    else {
-      setIsEmpty(false);
-    }
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        setResult(json);
+      })
+      .catch((err) => {
+        setResult(err);
+      });
   };
 
   useEffect(() => {
@@ -24,13 +30,12 @@ export default function Search() {
       setIsEmpty(false);
     });
     element.addEventListener("keypress", function (event) {
-      // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
-        // Cancel the default action, if needed
-
-        handleButtonClick(event.target!.value);
-
-        // Trigger the button element with a click
+        if (event.target!.value === "") setIsEmpty(true);
+        else {
+          setIsEmpty(false);
+          handleButtonClick(event.target!.value);
+        }
       }
     });
   }, []);
@@ -71,6 +76,11 @@ export default function Search() {
       <p className={`text-red-500 ${isEmpty ? "block" : "hidden"}`}>
         Whoops, can’t be empty…
       </p>
+      {result ? (
+        <div>{JSON.stringify(result)}</div>
+      ) : (
+        <p>Something went wrong!</p>
+      )}
     </div>
   );
 }
