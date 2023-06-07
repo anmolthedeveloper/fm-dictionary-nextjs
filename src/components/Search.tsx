@@ -9,10 +9,14 @@ export default function Search() {
   const [searchTxt, setSearchTxt] = useState("");
   const [result, setResult] = useState<any | null>(null);
   const [error, setError] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isAudioHovered, setIsAudioHovered] = useState(false);
 
-  const handleHover = () => {
-    setIsHovered(!isHovered);
+  const handleAudioEnterHover = () => {
+    setIsAudioHovered(true);
+  };
+
+  const handleAudioLeaveHover = () => {
+    setIsAudioHovered(false);
   };
 
   var audio: any | null;
@@ -130,8 +134,8 @@ export default function Search() {
             </div>
             <Image
               alt="Play sound"
-              onMouseEnter={handleHover}
-              onMouseLeave={handleHover}
+              onMouseEnter={handleAudioEnterHover}
+              onMouseLeave={handleAudioLeaveHover}
               onClick={async () => {
                 let audioUrl = result[0].phonetics.filter((phonetic: any) => {
                   if (phonetic.audio && phonetic.audio.length > 0) {
@@ -140,13 +144,19 @@ export default function Search() {
                 });
                 if (audioUrl[0].audio) {
                   let audio = new Audio(audioUrl[0].audio);
-                  if (audio) audio.play();
+                  if (audio) {
+                    audio.play();
+                    setIsAudioHovered(true);
+                    audio.addEventListener("ended", () => {
+                      setIsAudioHovered(false);
+                    });
+                  }
                 }
               }}
               width={1000}
               height={1000}
               src={
-                isHovered
+                isAudioHovered
                   ? "./images/icon-play-hover.svg"
                   : "./images/icon-play.svg"
               }
@@ -155,14 +165,14 @@ export default function Search() {
           </div>
           <div>
             <Meanings meanings={result[0].meanings} />
-            <div className="flex flex-col">
+            <div className="flex flex-col w-inherit">
               <hr className="w-full border-line my-5 dark:border-darkGrayCustom" />
               <a href={result[0].sourceUrls} target="_blank">
                 <div className="flex items-center">
                   <p className="dark:text-grayCustom">
                     Source
-                    <span className="ml-3 sm:ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom">
-                      {result[0].sourceUrls}
+                    <span className="ml-3 sm:ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom text-ellipsis">
+                      {result[0].sourceUrls[0]}
                     </span>
                   </p>
                   <Image

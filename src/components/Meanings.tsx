@@ -28,7 +28,7 @@ export default function Meanings({ meanings }: Prop) {
                 {meaning?.synonyms.map((item: any) => (
                   <span
                     key={uuidv4()}
-                    className="text-purpleCustom font-bold ml-5"
+                    className="text-purpleCustom font-bold ml-5 inline-block"
                   >
                     {item}
                   </span>
@@ -41,7 +41,7 @@ export default function Meanings({ meanings }: Prop) {
                 {meaning?.antonyms.map((item: any) => (
                   <span
                     key={uuidv4()}
-                    className="text-purpleCustom font-bold ml-5"
+                    className="text-purpleCustom font-bold ml-5 inline-block"
                   >
                     {item}
                   </span>
