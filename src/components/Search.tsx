@@ -89,7 +89,7 @@ export default function Search() {
             type="text"
             className={`bg-lightGrayCustom bg-opacity-50 text-gray-900 text-lg rounded-lg ${
               isEmpty ? "ring-red-500" : "focus:ring-purpleCustom"
-            }  focus:outline-none focus:ring-1 block w-full p-5  dark:bg-darkGrayCustom dark:placeholder-gray-400 dark:text-white caret-purpleCustom font-bold`}
+            }  focus:outline-none focus:ring-1 block w-full p-5  dark:bg-darkBlackCustom dark:placeholder-gray-400 dark:text-white caret-purpleCustom font-bold`}
             placeholder="Search for any word..."
             ref={inputElement}
             onChange={(e) => {
