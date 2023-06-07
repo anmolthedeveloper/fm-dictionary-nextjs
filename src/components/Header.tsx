@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { MouseEventHandler, useEffect, useState } from "react";
 import Toggle from "./Toggle";
-import { useTheme } from "next-themes";
 interface Prop {
   onClick: MouseEventHandler<HTMLDivElement>;
   checked: boolean | undefined;

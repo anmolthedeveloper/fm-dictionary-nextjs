@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-5 sm:mx-20 lg:mx-32 xl:mx-64 sm:mt-5 lg:mt-10">
+    <div className="mx-5 sm:mx-20 lg:mx-32 xl:mx-96 sm:mt-5 lg:mt-10">
       <Header checked={checked} onClick={clickHandler} />
       <Search />
     </div>

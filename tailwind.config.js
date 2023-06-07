@@ -7,6 +7,11 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    listStyleType: {
+      none: "none",
+      disc: "disc",
+      decimal: "decimal",
+    },
     extend: {
       colors: {
         darkestBlackCustom: "hsl(0,0%,2%)",

@@ -1,17 +1,33 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Meanings from "./Meanings";
 export default function Search() {
   // https://api.dictionaryapi.dev/api/v2/entries/en/keyboard
   const inputElement = useRef<HTMLInputElement>(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [searchTxt, setSearchTxt] = useState("");
   const [result, setResult] = useState<any | null>(null);
+  const [error, setError] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleHover = () => {
+    setIsHovered(!isHovered);
+  };
+
+  var audio: any | null;
 
   const handleButtonClick = (searchTerm: any) => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
       .then((response) => {
-        return response.json();
+        const json: any = response.json();
+        if (response.status == 404) {
+          setError(true);
+          return json;
+        }
+        setError(false);
+
+        return json;
       })
       .then((json) => {
         setResult(json);
@@ -39,6 +55,14 @@ export default function Search() {
       }
     });
   }, []);
+
+  // Below condition is good for setting setError to false but the setResult null not working!
+  if (searchTxt == "" && result) {
+    setResult(null);
+  }
+  if (searchTxt == "" && error) {
+    setError(false);
+  }
 
   return (
     <div>
@@ -68,7 +92,7 @@ export default function Search() {
               width={1000}
               height={1000}
               src={"./images/icon-search.svg"}
-              className="w-5 h-5 hover:cursor-pointer"
+              className="w-5 h-5 hover:cursor-pointer z-100"
             />
           </div>
         </div>
@@ -76,7 +100,83 @@ export default function Search() {
       <p className={`text-red-500 ${isEmpty ? "block" : "hidden"}`}>
         Whoops, can’t be empty…
       </p>
-      {result ? <div>{JSON.stringify(result)}</div> : <p></p>}
+      {/* <p>ERROR: {error ? "true" : "false"}</p>
+      <p>RESULT: {result ? "true" : "false"}</p> */}
+      {error ? (
+        <div className="flex flex-col justify-center items-center mt-28">
+          <Image
+            alt="search icon"
+            width={1000}
+            height={1000}
+            src={"./images/sad-face.png"}
+            className="w-20 h-20"
+          />
+          <p className="mt-10 text-lg font-bold">{result?.title}</p>
+          <p className="mt-10 text-grayCustom text-center">
+            {result?.message} {result?.resolution}
+          </p>
+        </div>
+      ) : result && !error ? (
+        <div className="mb-10">
+          <div className="flex mt-10 justify-between items-center">
+            <div className="flex flex-col">
+              <p className="text-6xl font-bold">{result[0].word}</p>
+              <p className="text-purpleCustom text-xl mt-4">
+                {result[0].phonetic}
+              </p>
+            </div>
+            <Image
+              alt="Play sound"
+              onMouseEnter={handleHover}
+              onMouseLeave={handleHover}
+              onClick={async () => {
+                let audioUrl = result[0].phonetics.filter((phonetic: any) => {
+                  if (phonetic.audio && phonetic.audio.length > 0) {
+                    return phonetic.audio;
+                  }
+                });
+                if (audioUrl[0].audio) {
+                  let audio = new Audio(audioUrl[0].audio);
+                  if (audio) audio.play();
+                }
+              }}
+              width={1000}
+              height={1000}
+              src={
+                isHovered
+                  ? "./images/icon-play-hover.svg"
+                  : "./images/icon-play.svg"
+              }
+              className="w-20 h-20"
+            />
+          </div>
+          <div>
+            <Meanings meanings={result[0].meanings} />
+            <div className="flex flex-col">
+              <hr className="w-full border-line my-5 dark:border-darkGrayCustom" />
+              <a href={result[0].sourceUrls} target="_blank">
+                <div className="flex items-center">
+                  <p className="dark:text-grayCustom">
+                    Source
+                    <span className="ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom">
+                      {result[0].sourceUrls}
+                    </span>
+                  </p>
+                  <Image
+                    alt="external link icon"
+                    width={1000}
+                    height={1000}
+                    src={"./images/icon-new-window.svg"}
+                    className="w-4 h-4 ml-2"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
