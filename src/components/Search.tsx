@@ -57,7 +57,12 @@ export default function Search() {
         else {
           (event.target as HTMLInputElement).blur();
           setIsEmpty(false);
-          handleButtonClick((event.target as HTMLInputElement).value);
+          if (!(event.target as HTMLInputElement).value.trim()) {
+            setIsEmpty(true);
+            (event.target as HTMLInputElement).value = "";
+          } else {
+            handleButtonClick((event.target as HTMLInputElement).value);
+          }
         }
       }
     });
@@ -142,7 +147,7 @@ export default function Search() {
                     return phonetic.audio;
                   }
                 });
-                if (audioUrl[0].audio) {
+                if (audioUrl[0]?.audio) {
                   let audio = new Audio(audioUrl[0].audio);
                   if (audio) {
                     audio.play();
