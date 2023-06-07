@@ -47,8 +47,11 @@ export default function Search() {
     });
     element.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
+        setResult(null);
+        setError(false);
         if ((event.target as HTMLInputElement).value === "") setIsEmpty(true);
         else {
+          (event.target as HTMLInputElement).blur();
           setIsEmpty(false);
           handleButtonClick((event.target as HTMLInputElement).value);
         }
@@ -158,7 +161,7 @@ export default function Search() {
                 <div className="flex items-center">
                   <p className="dark:text-grayCustom">
                     Source
-                    <span className="ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom">
+                    <span className="ml-3 sm:ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom">
                       {result[0].sourceUrls}
                     </span>
                   </p>
