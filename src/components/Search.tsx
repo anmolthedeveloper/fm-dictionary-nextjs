@@ -43,7 +43,6 @@ export default function Search() {
 
   useEffect(() => {
     const element = inputElement.current;
-
     if (!element) return;
 
     element.addEventListener("focusout", (event) => {
