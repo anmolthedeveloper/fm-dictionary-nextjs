@@ -1,9 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata = {
   title: "Dictionary App",
   description: "Author: anmolthedeveloper",
@@ -16,9 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={inter.className + " dark:bg-darkestBlackCustom bg-white"}
-      >
+      <body className={" dark:bg-darkestBlackCustom bg-white"}>
         <Providers>{children}</Providers>
       </body>
     </html>

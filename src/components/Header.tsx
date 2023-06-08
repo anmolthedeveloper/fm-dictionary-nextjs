@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MouseEventHandler, useEffect, useState } from "react";
 import Toggle from "./Toggle";
+import FontText from "./FontText";
 import { Inter, Inconsolata, Lora } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 const inconsolata = Inconsolata({ subsets: ["latin"] });
@@ -8,13 +9,19 @@ const lora = Lora({ subsets: ["latin"] });
 interface Prop {
   onClick: MouseEventHandler<HTMLDivElement>;
   checked: boolean | undefined;
+  fontIndex: number;
+  fontIndexChangeHandler: Function;
+  isMenuOpened: boolean;
+  fontChangeHandler: MouseEventHandler<HTMLDivElement>;
 }
-export default function Header({ checked, onClick }: Prop) {
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
-
-  const fontChangeHandler = () => {
-    setIsMenuOpened(!isMenuOpened);
-  };
+export default function Header({
+  checked,
+  onClick,
+  fontIndex,
+  fontIndexChangeHandler,
+  isMenuOpened,
+  fontChangeHandler,
+}: Prop) {
   return (
     <div className="flex justify-between text-black items-center">
       <div>
@@ -28,10 +35,12 @@ export default function Header({ checked, onClick }: Prop) {
       </div>
       <div className="flex justify-center items-center">
         <div
-          className="flex justify-center items-center relative"
+          className="flex justify-end items-center relative w-36"
           onClick={fontChangeHandler}
         >
-          <p className="mr-3 dark:text-white">Sans Serif</p>
+          <p className="mr-3 dark:text-white">{`${
+            fontIndex == 1 ? "Sans Serif" : fontIndex == 2 ? "Serif" : "Mono"
+          }`}</p>
           <Image
             height={1000}
             width={1000}
@@ -41,18 +50,34 @@ export default function Header({ checked, onClick }: Prop) {
           />
           <div
             className={`
-              absolute rounded-xl bottom-[-8.5rem] left-[-3rem] z-20 p-3 w-36  bg-white dark:bg-darkBlackCustom shadow-lg dark:shadow-purpleCustom ${
+              absolute rounded-xl bottom-[-8.5rem] left-0 z-20 p-3 w-36  bg-white dark:bg-darkBlackCustom shadow-lg dark:shadow-purpleCustom ${
                 isMenuOpened ? "" : "hidden"
               }
             `}
           >
-            <p className={`p-1 dark:text-white ${inter.className}`}>
-              Sans Serif
-            </p>
-            <p className={`p-1 dark:text-white ${lora.className}`}>Serif</p>
-            <p className={`p-1 dark:text-white ${inconsolata.className}`}>
-              Mono
-            </p>
+            <FontText
+              className={`p-1 dark:text-white ${inter.className}`}
+              index={1}
+              fontName={"Sans Serif"}
+              active={fontIndex == 1}
+              onClick={fontIndexChangeHandler}
+            />
+
+            <FontText
+              className={`p-1 dark:text-white ${lora.className}`}
+              index={2}
+              fontName={"Serif"}
+              active={fontIndex == 2}
+              onClick={fontIndexChangeHandler}
+            />
+
+            <FontText
+              className={`p-1 dark:text-white ${inconsolata.className}`}
+              index={3}
+              fontName={"Mono"}
+              active={fontIndex == 3}
+              onClick={fontIndexChangeHandler}
+            />
           </div>
         </div>
         <hr className="w-[0.01rem] h-8 my-8 bg-gray-300 dark:bg-white border-0 mx-5"></hr>
