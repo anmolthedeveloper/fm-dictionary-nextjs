@@ -18,12 +18,14 @@ export default function FontText({
   };
 
   return (
-    <p
-      className={`${className}
-        ${active ? "text-purpleCustom font-bold dark:text-purpleCustom" : ""}`}
-      onClick={onClickHandler}
-    >
-      {fontName}
-    </p>
+    <div className={className}>
+      <p
+        className={`
+        ${active ? "text-purpleCustom dark:text-purpleCustom font-bold" : ""}`}
+        onClick={onClickHandler}
+      >
+        {fontName}
+      </p>
+    </div>
   );
 }
