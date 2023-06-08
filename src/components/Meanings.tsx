@@ -13,7 +13,7 @@ export default function Meanings({ meanings }: Prop) {
             <p className="italic font-bold text-2xl">{meaning?.partOfSpeech}</p>
             <hr className="w-full border-line ml-5 dark:border-darkGrayCustom" />
           </div>
-          <p className="dark:text-grayCustom text-lg mt-8">Meaning</p>
+          <p className="text-grayCustom  text-lg mt-8">Meaning</p>
           <List list={meaning?.definitions} />
           <div
             className={
@@ -23,7 +23,7 @@ export default function Meanings({ meanings }: Prop) {
             }
           >
             {meaning?.synonyms.length > 0 && (
-              <p className="dark:text-grayCustom">
+              <p className="text-grayCustom">
                 Synonyms
                 {meaning?.synonyms.map((item: any) => (
                   <span
@@ -36,7 +36,7 @@ export default function Meanings({ meanings }: Prop) {
               </p>
             )}
             {meaning?.antonyms.length > 0 && (
-              <p className="dark:text-grayCustom">
+              <p className="text-grayCustom">
                 Antonyms
                 {meaning?.antonyms.map((item: any) => (
                   <span

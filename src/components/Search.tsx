@@ -173,9 +173,9 @@ export default function Search() {
               <hr className="w-full border-line my-5 dark:border-darkGrayCustom" />
               <a href={result[0].sourceUrls} target="_blank">
                 <div className="flex items-center">
-                  <p className="dark:text-grayCustom">
+                  <p className="text-grayCustom">
                     Source
-                    <span className="ml-3 sm:ml-10 dark:text-white underline-offset-2 hover:underline decoration-grayCustom text-ellipsis">
+                    <span className="ml-3 sm:ml-10 dark:text-white text-black underline-offset-2 hover:underline decoration-grayCustom text-ellipsis">
                       {result[0].sourceUrls[0]}
                     </span>
                   </p>

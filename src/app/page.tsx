@@ -50,8 +50,8 @@ export default function Home() {
     >
       <div
         className={`${
-          isMenuOpened ? "block" : "hidden"
-        } w-[vw] h-[vh] bg-black/50 dark:bg-white/50`}
+          isMenuOpened ? "fixed" : "hidden"
+        } w-[vw] h-[vh] bg-black/50 dark:bg-white/50 z-19`}
         onClick={() => {
           setIsMenuOpened(false);
         }}
