@@ -104,7 +104,7 @@ export default function Search() {
               width={1000}
               height={1000}
               src={"./images/icon-search.svg"}
-              className="w-5 h-5 hover:cursor-pointer z-100"
+              className="w-5 h-5 select-none z-100"
             />
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function Search() {
             width={1000}
             height={1000}
             src={"./images/sad-face.png"}
-            className="w-20 h-20"
+            className="w-20 h-20 select-none"
           />
           <p className="mt-10 text-lg font-bold">{result?.title}</p>
           <p className="mt-10 text-grayCustom text-center">
@@ -165,7 +165,7 @@ export default function Search() {
                   ? "./images/icon-play-hover.svg"
                   : "./images/icon-play.svg"
               }
-              className="w-20 h-20"
+              className="w-20 h-20 select-none"
             />
           </div>
           <div>

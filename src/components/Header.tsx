@@ -23,7 +23,7 @@ export default function Header({
   fontChangeHandler,
 }: Prop) {
   return (
-    <div className="flex justify-between text-black items-center">
+    <div className="flex justify-between text-black items-center select-none">
       <div>
         <Image
           height={1000}
@@ -33,7 +33,7 @@ export default function Header({
           className="w-8"
         />
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center cursor-pointer">
         <div
           className="flex justify-end items-center relative w-36"
           onClick={fontChangeHandler}
@@ -45,7 +45,11 @@ export default function Header({
             height={1000}
             width={1000}
             alt="bottom arrow"
-            src={"./images/icon-arrow-down.svg"}
+            src={
+              isMenuOpened
+                ? "./images/icon-arrow-up.svg"
+                : "./images/icon-arrow-down.svg"
+            }
             className="w-3"
           />
           <div
