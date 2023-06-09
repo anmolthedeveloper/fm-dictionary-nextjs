@@ -33,7 +33,7 @@ export default function Header({
           className="w-8"
         />
       </div>
-      <div className="flex justify-center items-center cursor-pointer">
+      <div className="flex justify-center items-center lg:cursor-pointer">
         <div
           className="flex justify-end items-center relative w-36"
           onClick={fontChangeHandler}
