@@ -76,7 +76,7 @@ export default function Search() {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <form
         className="flex items-center"
         onSubmit={(e) => {

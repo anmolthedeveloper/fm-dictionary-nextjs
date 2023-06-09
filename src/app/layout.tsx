@@ -12,7 +12,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={" dark:bg-darkestBlackCustom bg-white"}>
+      <body
+        className={
+          " dark:bg-darkestBlackCustom bg-white overflow-y-scroll scrollbar-w-1 scrollbar-track-gray-200 scrollbar-thumb-gray-500"
+        }
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
