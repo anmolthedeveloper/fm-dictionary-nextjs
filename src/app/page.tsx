@@ -39,32 +39,35 @@ export default function Home() {
   };
 
   return (
-    <div
-      className={`mx-5 sm:mx-20 lg:mx-32 xl:mx-96 sm:mt-5 lg:mt-10 ${
-        fontIndex == 1
-          ? inter.className
-          : fontIndex == 2
-          ? lora.className
-          : inconsolata.className
-      }`}
-    >
+    <>
       <div
         className={`${
-          isMenuOpened ? "fixed" : "hidden"
-        } w-[vw] h-[vh] bg-black/50 dark:bg-white/50 z-19`}
+          isMenuOpened ? "" : "hidden"
+        } w-[100vw] h-[100vh] fixed z-20`}
         onClick={() => {
           setIsMenuOpened(false);
         }}
       ></div>
-      <Header
-        checked={checked}
-        onClick={clickHandler}
-        fontIndex={fontIndex}
-        fontIndexChangeHandler={fontIndexChangeHandler}
-        isMenuOpened={isMenuOpened}
-        fontChangeHandler={fontChangeHandler}
-      />
-      <Search />
-    </div>
+
+      <div
+        className={`mx-5 sm:mx-20 lg:mx-32 xl:mx-96 sm:pt-5 lg:pt-10 ${
+          fontIndex == 1
+            ? inter.className
+            : fontIndex == 2
+            ? lora.className
+            : inconsolata.className
+        }`}
+      >
+        <Header
+          checked={checked}
+          onClick={clickHandler}
+          fontIndex={fontIndex}
+          fontIndexChangeHandler={fontIndexChangeHandler}
+          isMenuOpened={isMenuOpened}
+          fontChangeHandler={fontChangeHandler}
+        />
+        <Search />
+      </div>
+    </>
   );
 }

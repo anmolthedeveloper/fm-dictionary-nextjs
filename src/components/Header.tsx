@@ -54,7 +54,7 @@ export default function Header({
           />
           <div
             className={`
-              absolute rounded-xl bottom-[-8.5rem] left-0 z-20 p-3 w-36  bg-white dark:bg-darkBlackCustom shadow-lg dark:shadow-purpleCustom ${
+              absolute rounded-xl bottom-[-8.5rem] left-0 z-30 p-3 w-36  bg-white dark:bg-darkBlackCustom shadow-lg dark:shadow-purpleCustom ${
                 isMenuOpened ? "" : "hidden"
               }
             `}
